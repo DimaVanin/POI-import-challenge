@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - 6379:6379
+    command: redis-server --save 20 1 --loglevel warning
+    volumes: 
+      - cache:/data
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 124M
+        reservations:
+          cpus: '1'
+          memory: 124M
+volumes:
+  cache:
+    driver: local
