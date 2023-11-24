@@ -5,3 +5,7 @@ export interface ImportJobParameters {
   lng2: number;
   iterationStep: number;
 }
+
+export interface ImportJobResult {
+  isFinal: boolean;
+}
