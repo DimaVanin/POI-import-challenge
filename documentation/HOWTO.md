@@ -13,7 +13,7 @@ nvm exec npm ci
 ## Running the app
 
 > [!IMPORTANT]
-> It's necessary to create .env file and provide environments values
+> It's necessary to create .env file and provide environments values based on .env.example file
 
 ### Option 1 - applications aren't in containers
 

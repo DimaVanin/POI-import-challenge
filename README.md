@@ -20,7 +20,7 @@ By adhering to these foundational principles, the POI import service will establ
 
 * [High level architecture diagram](./documentation/ARCHITECTURE.md)
 * [API/Application interface](./documentation/API.md)
-* [Deployment](./documentation/DEPLOYMENT.md)
-* [DB schema](./documentation/DB_SCHEMA.md)
 * [Import logic](./documentation/POI_IMPORT.md)
+* [DB schema](./documentation/DB_SCHEMA.md)
 * [Developer guide](./documentation/HOWTO.md)
+* [Deployment](./documentation/DEPLOYMENT.md)
