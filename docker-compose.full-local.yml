@@ -1,0 +1,100 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: ./
+      dockerfile: ./deployment/Api.Dockerfile
+    environment:
+      PORT: 3000
+      REDIS_URL: redis://redis_queue:6379
+    ports:
+      - 3000:3000
+    depends_on:
+      - redis_queue
+      - mongodb
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 128M
+        reservations:
+          cpus: '1'
+          memory: 128M
+
+  worker:
+    build:
+      context: ./
+      dockerfile: ./deployment/Worker.Dockerfile
+    environment:
+      PORT: 3100
+      REDIS_URL: redis://redis_queue:6379
+      MONGODB_URL: mongodb://root:rootpassword@mongodb:27017
+      OPEN_CHARGE_MAP_API_KEY: ${OPEN_CHARGE_MAP_API_KEY}
+    ports:
+      - 3100:3100
+    depends_on:
+      - redis_queue
+      - mongodb
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 128M
+        reservations:
+          cpus: '1'
+          memory: 128M
+
+  scheduler:
+    build:
+      context: ./
+      dockerfile: ./deployment/Scheduler.Dockerfile
+    environment:
+      PORT: 3200
+      REDIS_URL: redis://redis_queue:6379
+    ports:
+      - 3200:3200
+    depends_on:
+      - redis_queue
+      - mongodb
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 128M
+        reservations:
+          cpus: '1'
+          memory: 128M
+
+  redis_queue:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - 6379:6379
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - redis_queue:/data
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 128M
+        reservations:
+          cpus: '1'
+          memory: 128M
+
+  mongodb:
+    image: mongo:7.0.3
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+
+volumes:
+  redis_queue:
+    driver: local
+  mongodb:
+    driver: local

@@ -33,7 +33,7 @@
     "uuid": "^9.0.1"
   },
   "scripts": {
-    "build": "rimraf dist && tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json",
     "start:api": "cross-env PORT=3000 nodemon --exec \"ts-node src/api/main.ts\" | pino-pretty",
     "start:worker": "cross-env PORT=3100 nodemon --exec \"ts-node src/worker/main.ts\" | pino-pretty",
     "start:worker2": "cross-env PORT=3102 nodemon --exec \"ts-node src/worker/main.ts\" | pino-pretty",
@@ -51,6 +51,7 @@
     "eslint": "^8.54.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
-    "prettier": "^3.1.0"
+    "prettier": "^3.1.0",
+    "rimraf": "^5.0.5"
   }
 }
