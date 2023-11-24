@@ -7,7 +7,7 @@ export const boundingBoxStringToParams = (
   lng2: number | null;
 } => {
   const matchResult = string.match(
-    /\((\d*\.?\d*),(\d*\.?\d*)\),\((\d*\.?\d*),(\d*\.?\d*)\)/,
+    /\((-?\d*\.?\d*),(-?\d*\.?\d*)\),\((-?\d*\.?\d*),(-?\d*\.?\d*)\)/,
   );
 
   if (matchResult === null) {
