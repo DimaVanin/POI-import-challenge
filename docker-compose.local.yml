@@ -1,14 +1,14 @@
 version: '3'
 
 services:
-  cache:
+  redis_queue:
     image: redis:6.2-alpine
     restart: always
     ports:
       - 6379:6379
     command: redis-server --save 20 1 --loglevel warning
-    volumes: 
-      - cache:/data
+    volumes:
+      - redis_queue:/data
     deploy:
       resources:
         limits:
@@ -17,6 +17,19 @@ services:
         reservations:
           cpus: '1'
           memory: 124M
+
+  mongodb:
+    image: mongo:7.0.3
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+
 volumes:
-  cache:
+  redis_queue:
+    driver: local
+  mongodb:
     driver: local

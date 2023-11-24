@@ -3,6 +3,7 @@ import { Controller, Logger } from '@nestjs/common';
 import { POI_IMPORT_QUEUE_NAME } from '../../../common/constants';
 import { MessagesQueueService } from '../../../common/modules/messages-queue/messages-queue.service';
 import { ImportJobHandler } from './import-job.handler';
+import { ImportJobParameters, ImportJobResult } from '../../../common/types';
 
 @Controller()
 export class ImportController {
@@ -16,9 +17,11 @@ export class ImportController {
   ) {}
 
   async onApplicationBootstrap() {
-    this.subscription = this.messagesQueueService.subscribe<any>(
-      POI_IMPORT_QUEUE_NAME,
-      async (data: any) => this.importJobHandler.handle(data),
+    this.subscription = this.messagesQueueService.subscribe<
+      ImportJobParameters,
+      ImportJobResult
+    >(POI_IMPORT_QUEUE_NAME, async (data: any) =>
+      this.importJobHandler.handle(data),
     );
 
     this.logger.log('Jobs subscription initiated');

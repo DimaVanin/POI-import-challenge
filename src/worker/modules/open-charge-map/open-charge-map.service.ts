@@ -8,6 +8,7 @@ import {
   COORDINATES_LENGTH,
   OPEN_CHARGE_MAP_API_URL,
 } from './constants';
+import { POIItemResponse } from './types';
 
 @Injectable()
 export class OpenChargeMapService {
@@ -21,6 +22,8 @@ export class OpenChargeMapService {
       params: {
         key: OPEN_CHARGE_MAP_API_KEY,
         maxresults: BATCH_SIZE,
+        camelcase: true,
+        includecomments: false,
       },
     });
 
@@ -28,7 +31,7 @@ export class OpenChargeMapService {
       retries: 3,
       retryDelay: (...arg) => axiosRetry.exponentialDelay(...arg, 1000),
       retryCondition: (error) =>
-        [429, 500, 501].includes(error.response.status),
+        [429, 500, 501].includes(error?.response?.status),
       onRetry: (retryCount) => {
         this.logger.warn({ retryCount }, 'Retry on request');
       },
@@ -42,7 +45,7 @@ export class OpenChargeMapService {
     lng2: number;
   }): Promise<{
     hasMore: boolean;
-    data: unknown[]; // TODO: provide interface
+    data: POIItemResponse[]; // TODO: provide interface
   }> {
     const startAt = Date.now();
 
@@ -51,7 +54,7 @@ export class OpenChargeMapService {
     };
 
     try {
-      const response = await this.client({
+      const response = await this.client<POIItemResponse[]>({
         method: 'GET',
         params,
       });

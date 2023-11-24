@@ -73,9 +73,9 @@ export class MessagesQueueService {
     this.logger.debug({ name }, 'New queue is setup');
   }
 
-  public subscribe<T>(
+  public subscribe<T, R>(
     name: string,
-    handler: (data: T) => Promise<void>,
+    handler: (data: T) => Promise<R>,
   ): () => void {
     const worker = new Worker(
       name,
