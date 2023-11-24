@@ -24,3 +24,15 @@ By adhering to these foundational principles, the POI import service will establ
 * [DB schema](./documentation/DB_SCHEMA.md)
 * [Developer guide](./documentation/HOWTO.md)
 * [Deployment](./documentation/DEPLOYMENT.md)
+
+
+## Not implemented features
+
+- [ ] GitHub actions:
+  - [ ] action to build project
+  - [ ] action to run linter
+  - [ ] action to run tests
+  - [ ] action to build Docker images
+  - [ ] dummy actions to deploy on Dev/Stage/Production
+- [ ] Unit tests
+- [ ] Integration tests
