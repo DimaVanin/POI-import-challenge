@@ -13,7 +13,7 @@ export class DataProvider {
   @Prop({ type: String, default: () => uuid() })
   _id: string;
 
-  @Prop({ type: Number, unique: true })
+  @Prop({ type: Number, unique: true, index: 1 })
   externalId: number;
 
   @Prop({ type: String })
