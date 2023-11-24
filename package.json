@@ -7,6 +7,7 @@
     "@nestjs/core": "^10.2.10",
     "@nestjs/mongoose": "^10.0.2",
     "@nestjs/platform-express": "^10.2.10",
+    "@nestjs/schedule": "^4.0.0",
     "asynckit": "^0.4.0",
     "axios": "^1.6.2",
     "axios-retry": "^3.9.1",
