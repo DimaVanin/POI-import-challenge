@@ -36,3 +36,4 @@ By adhering to these foundational principles, the POI import service will establ
   - [ ] dummy actions to deploy on Dev/Stage/Production
 - [ ] Unit tests
 - [ ] Integration tests
+- [ ] Deployment steps documentation
